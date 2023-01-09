@@ -25,6 +25,7 @@ import (
 	cnilibrary "github.com/containernetworking/cni/libcni"
 	"github.com/containernetworking/cni/pkg/invoke"
 	"github.com/containernetworking/cni/pkg/version"
+	"github.com/sirupsen/logrus"
 )
 
 // Opt sets options for a CNI instance
@@ -210,6 +211,7 @@ func WithAllConf(c *libcni) error {
 // configured cni config directory and load them. max is
 // the maximum network config to load (max i<= 0 means no limit).
 func loadFromConfDir(c *libcni, max int) error {
+	logrus.Warnf("### loadFromConfDir: libcni.pluginConfDir: %q", c.pluginConfDir)
 	files, err := cnilibrary.ConfFiles(c.pluginConfDir, []string{".conf", ".conflist", ".json"})
 	switch {
 	case err != nil:

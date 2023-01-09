@@ -28,6 +28,7 @@ import (
 	"github.com/containernetworking/cni/pkg/types"
 	types100 "github.com/containernetworking/cni/pkg/types/100"
 	"github.com/containernetworking/cni/pkg/version"
+	"github.com/sirupsen/logrus"
 )
 
 type CNI interface {
@@ -84,6 +85,7 @@ type libcni struct {
 }
 
 func defaultCNIConfig() *libcni {
+	logrus.Warnf("### Default CNI dir: %q", DefaultCNIDir)
 	return &libcni{
 		config: config{
 			pluginDirs:       []string{DefaultCNIDir},
